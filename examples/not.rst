@@ -98,7 +98,7 @@ gate's input and :math:`z` its output, using a :term:`penalty function`:
 
 This penalty function represents the NOT gate in that for assignments of variables that
 match valid states of the gate, the function evaluates at a lower value than assignments
-that would be invalid for the gate. Therefore, when the D-Wave minimizes a BQM based on this
+that would be invalid for the gate. Therefore, when the D-Wave system minimizes a BQM based on this
 penalty function, it finds those assignments of variables that match valid gate states.
 
 The table below shows that this function penalizes states
@@ -128,9 +128,10 @@ valid assignments, and the value of :math:`P` is
 
     2xz-x-z+1 = 2 \times 0 \times 1 - 0 - 1 + 1 = -1+1=0,
 
-not penalizing the valid assignment of variables. In contrast, the state :math:`x,
-z=0,0` of the third row represents an invalid assignment, and the
-value of :math:`P` is
+not penalizing the valid assignment of variables. 
+
+In contrast, the state :math:`x, z=0,0` of the third row represents 
+an invalid assignment, and the value of :math:`P` is
 
 .. math::
 
@@ -204,7 +205,7 @@ ask for 5000 samples.
 
 >>> Q = {('x', 'x'): -1, ('x', 'z'): 2, ('z', 'x'): 0, ('z', 'z'): -1}
 >>> response = sampler.sample_qubo(Q, num_reads=5000)
->>> for sample, energy, num_occurrences in response.data():   # doctest: +SKIP
+>>> for sample, energy, num_occurrences, _chain_break_fraction in response.data():   # doctest: +SKIP
 ...    print(sample, "Energy: ", energy, "Occurrences: ", num_occurrences)
 ...
 {'x': 0, 'z': 1} Energy:  -1.0 Occurrences:  2062
