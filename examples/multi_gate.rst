@@ -178,7 +178,7 @@ those that fail to do so.
     # Check how many solutions meet the constraints (are valid)
     valid, invalid, data = 0, 0, []
     for datum in response.data():
-        sample, energy, num = datum
+        sample, energy, num, _chain_break_fraction = datum
         if (csp.check(sample)):
             valid = valid+num
             for i in range(num):
@@ -288,11 +288,13 @@ converted the constraint satisfaction problem to a binary quadratic model using 
 default minimum energy gap of 2. Therefore, each constraint violated by the solution increases
 the energy level of the binary quadratic model by at least 2 relative to ground energy.
 
+>>> import matplotlib.pyplot as plt
 >>> plt.ion()
 >>> plt.scatter(range(len(data)), [x[1] for x in data], c=['y' if (x[2] == '1')
 ...             else 'r' for x in data],marker='.')
 >>> plt.xlabel('Sample')
 >>> plt.ylabel('Energy')
+>>> plt.show()
 
 
 .. figure:: ../_static/MultiGateCircuit_Results.png
